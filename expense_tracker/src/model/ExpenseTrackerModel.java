@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Implements the data model for an Expense Tracker application, now updated to include enhanced observer management.
+ * This class manages a list of transactions, providing functionalities for adding, removing, and retrieving transaction data.
+ * A update includes an improved mechanism to register {@code ExpenseTrackerModelListener} instances for
+ * state change events, adhering to the Observer design pattern. This enhanced listener registration process ensures
+ * more efficient notification and handling of state changes.
+ */
 public class ExpenseTrackerModel {
 
   //encapsulation - data integrity
   private List<Transaction> transactions;
   private List<Integer> matchedFilterIndices;
+  private List<ExpenseTrackerModelListener> listeners = new ArrayList<>();
 
-  // This is applying the Observer design pattern.                          
+
+  // This is applying the Observer design pattern.
   // Specifically, this is the Observable class. 
     
   public ExpenseTrackerModel() {
@@ -26,12 +35,14 @@ public class ExpenseTrackerModel {
     transactions.add(t);
     // The previous filter is no longer valid.
     matchedFilterIndices.clear();
+    stateChanged();  // Notify observers after adding a transaction
   }
 
   public void removeTransaction(Transaction t) {
     transactions.remove(t);
     // The previous filter is no longer valid.
     matchedFilterIndices.clear();
+    stateChanged();  // Notify observers after removing a transaction
   }
 
   public List<Transaction> getTransactions() {
@@ -52,6 +63,7 @@ public class ExpenseTrackerModel {
       // For encapsulation, copy in the input list 
       this.matchedFilterIndices.clear();
       this.matchedFilterIndices.addAll(newMatchedFilterIndices);
+      stateChanged();
   }
 
   public List<Integer> getMatchedFilterIndices() {
@@ -72,27 +84,30 @@ public class ExpenseTrackerModel {
   public boolean register(ExpenseTrackerModelListener listener) {
       // For the Observable class, this is one of the methods.
       //
-      // TODO
-      return false;
+      if (listener == null || listeners.contains(listener)) {
+          return false;
+      }
+      listeners.add(listener);
+      return true;
   }
 
   public int numberOfListeners() {
       // For testing, this is one of the methods.
       //
-      //TODO
-      return 0;
+      return listeners.size();
   }
 
   public boolean containsListener(ExpenseTrackerModelListener listener) {
       // For testing, this is one of the methods.
       //
-      //TODO
-      return false;
+      return listeners.contains(listener);
   }
 
   protected void stateChanged() {
       // For the Observable class, this is one of the methods.
       //
-      //TODO
-  }
+      for (ExpenseTrackerModelListener listener : listeners) {
+          listener.update(this);
+      }
+    }
 }
