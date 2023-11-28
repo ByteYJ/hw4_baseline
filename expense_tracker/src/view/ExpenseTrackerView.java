@@ -16,9 +16,7 @@ import model.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpenseTrackerView extends JFrame implements ExpenseTrackerModelListener {
-
-  private JTable transactionsTable;
+public class ExpenseTrackerView extends JFrame implements ExpenseTrackerModelListener { private JTable transactionsTable;
   private JButton addTransactionBtn;
   private JFormattedTextField amountField;
   private JTextField categoryField;
