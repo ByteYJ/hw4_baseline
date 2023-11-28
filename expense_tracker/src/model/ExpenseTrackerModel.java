@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Implements the data model for an Expense Tracker application. This class manages a list of transactions,
+ * providing functionalities for adding, removing, and retrieving transaction data. It adheres to the Observer
+ * design pattern, notifying registered listeners of any state changes. This approach facilitates a decoupled
+ * architecture, allowing for scalable and maintainable code.
+ */
 public class ExpenseTrackerModel {
 
   //encapsulation - data integrity
