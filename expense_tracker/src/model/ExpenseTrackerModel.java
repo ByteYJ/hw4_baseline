@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Implements the data model for an Expense Tracker application. This class manages a list of transactions,
- * providing functionalities for adding, removing, and retrieving transaction data. It adheres to the Observer
- * design pattern, notifying registered listeners of any state changes. This approach facilitates a decoupled
- * architecture, allowing for scalable and maintainable code.
+ * Implements the data model for an Expense Tracker application, now updated to include enhanced observer management.
+ * This class manages a list of transactions, providing functionalities for adding, removing, and retrieving transaction data.
+ * A update includes an improved mechanism to register {@code ExpenseTrackerModelListener} instances for
+ * state change events, adhering to the Observer design pattern. This enhanced listener registration process ensures
+ * more efficient notification and handling of state changes.
  */
 public class ExpenseTrackerModel {
 
